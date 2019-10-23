@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Penguin.Reflection.Dynamic</name>
+    </assembly>
+    <members>
+        <member name="M:Penguin.Reflection.Dynamic.CodeGenerator.CompileAndRun(System.String,System.String[])">
+            <summary>
+            This accepts an array of strings but currently only assumes one string (file) for the purposes of the cache.
+            If more files are added this will likely break it
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="Namespace"></param>
+            <param name="code"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
