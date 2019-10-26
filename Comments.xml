@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>Penguin.Reflection.Dynamic.Local</name>
+        <name>Penguin.Reflection.Dynamic</name>
     </assembly>
     <members>
         <member name="M:Penguin.Reflection.Dynamic.CodeGenerator.CompileAndRun(System.String,System.String[])">
