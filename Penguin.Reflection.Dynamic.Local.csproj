@@ -9,7 +9,7 @@
     <RootNamespace>Penguin.Reflection.Dynamic</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.CSharp" Version="4.6.0" />
-    <PackageReference Include="System.CodeDom" Version="4.6.0" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="System.CodeDom" Version="4.7.0" />
   </ItemGroup>
 </Project>
