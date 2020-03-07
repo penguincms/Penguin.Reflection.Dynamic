@@ -13,10 +13,7 @@ namespace Penguin.Reflection.Dynamic
     [SuppressMessage("Microsoft.Naming", "CA1724:TypeNamesShouldNotMatchNamespaces")]
     public static class CodeGenerator
     {
-        public enum TemplateType
-        {
-            Standard
-        }
+        private static readonly ConcurrentDictionary<string, MethodInfo> Precompiled = new ConcurrentDictionary<string, MethodInfo>();
 
         //Double brace to keep string format from bitching
         public static Dictionary<TemplateType, string> Templates { get; } = new Dictionary<TemplateType, string>()
@@ -24,7 +21,10 @@ namespace Penguin.Reflection.Dynamic
             [TemplateType.Standard] = "using System; namespace _{2} {{ public static class Ex {{ public static {0} Main() {{ {1} }} }} }}"
         };
 
-        private static readonly ConcurrentDictionary<string, MethodInfo> Precompiled = new ConcurrentDictionary<string, MethodInfo>();
+        public enum TemplateType
+        {
+            Standard
+        }
 
         public static T Execute<T>(string body, TemplateType templateType = TemplateType.Standard)
         {
