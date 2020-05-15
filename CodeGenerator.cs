@@ -67,7 +67,6 @@ namespace Penguin.Reflection.Dynamic
         /// This accepts an array of strings but currently only assumes one string (file) for the purposes of the cache.
         /// If more files are added this will likely break it
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <param name="Namespace"></param>
         /// <param name="code"></param>
         /// <returns></returns>
