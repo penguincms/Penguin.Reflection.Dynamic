@@ -70,7 +70,6 @@ namespace Penguin.Reflection.Dynamic
         /// <param name="Namespace"></param>
         /// <param name="code"></param>
         /// <returns></returns>
-        [SuppressMessage("Globalization", "CA1303:Do not pass literals as localized parameters")]
         private static object CompileAndRun(string Namespace, params string[] code)
         {
             CompilerParameters CompilerParams = new CompilerParameters
