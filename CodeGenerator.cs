@@ -103,7 +103,7 @@ namespace Penguin.Reflection.Dynamic
 
                 if (methInfo != null)
                 {
-                    Precompiled.TryAdd(code.First(), methInfo);
+                    _ = Precompiled.TryAdd(code.First(), methInfo);
 
                     return methInfo.Invoke(null, Array.Empty<object>());
                 }
