@@ -13,7 +13,7 @@ namespace Penguin.Reflection.Dynamic
     [SuppressMessage("Microsoft.Naming", "CA1724:TypeNamesShouldNotMatchNamespaces")]
     public static class CodeGenerator
     {
-        private static readonly ConcurrentDictionary<string, MethodInfo> Precompiled = new ConcurrentDictionary<string, MethodInfo>();
+        private static readonly ConcurrentDictionary<string, MethodInfo> Precompiled = new();
 
         //Double brace to keep string format from bitching
         public static Dictionary<TemplateType, string> Templates { get; } = new Dictionary<TemplateType, string>()
@@ -35,12 +35,7 @@ namespace Penguin.Reflection.Dynamic
 
             object o = Execute(body, typeof(T), templateType);
 
-            if (o is null)
-            {
-                return default;
-            }
-
-            return (T)o;
+            return o is null ? default : (T)o;
         }
 
         public static object Execute(string body, Type t, TemplateType templateType = TemplateType.Standard)
@@ -53,14 +48,7 @@ namespace Penguin.Reflection.Dynamic
             string ns = Guid.NewGuid().ToString().Replace("-", "");
             string Code = string.Format(CultureInfo.CurrentCulture, Templates[templateType], t.FullName, body, ns);
 
-            if (!Precompiled.TryGetValue(Code, out MethodInfo m))
-            {
-                return CompileAndRun(ns, Code);
-            }
-            else
-            {
-                return m.Invoke(null, Array.Empty<object>());
-            }
+            return !Precompiled.TryGetValue(Code, out MethodInfo m) ? CompileAndRun(ns, Code) : m.Invoke(null, Array.Empty<object>());
         }
 
         /// <summary>
@@ -72,7 +60,7 @@ namespace Penguin.Reflection.Dynamic
         /// <returns></returns>
         private static object CompileAndRun(string Namespace, params string[] code)
         {
-            CompilerParameters CompilerParams = new CompilerParameters
+            CompilerParameters CompilerParams = new()
             {
                 GenerateInMemory = true,
                 TreatWarningsAsErrors = false,
@@ -83,7 +71,7 @@ namespace Penguin.Reflection.Dynamic
             string[] references = { "System.dll" };
             CompilerParams.ReferencedAssemblies.AddRange(references);
 
-            using (CSharpCodeProvider provider = new CSharpCodeProvider())
+            using (CSharpCodeProvider provider = new())
             {
                 CompilerResults compile = provider.CompileAssemblyFromSource(CompilerParams, code);
 
